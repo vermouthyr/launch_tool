@@ -3,31 +3,36 @@ import sys
 import socket
 import operator as op
 
-pull_command = 'git pull origin master'
-launch_command = 'python hello.py'
-exit_command = 'exit'
+HOST = '0.0.0.0'
+PORT = 1360
+ADDR = (HOST, PORT)
+BUFF_SIZE = 1024
+
+PULL_COMMAND = 'git pull origin master'
+LAUNCH_COMMAND = 'python hello.py'
+EXIT_COMMAND = 'exit'
 
 server = socket.socket()
-server.bind(('0.0.0.0', 1360))
+server.bind(ADDR)
 server.listen(5)
 
 while True:
     conn, addr = server.accept()
     print('connected')
     while True:
-        data = conn.recv(1024)
+        data = conn.recv(BUFF_SIZE)
         data_str = str(data, encoding='utf-8')
         result = ''
         if not data:
             print('client has lost')
             break
-        elif op.eq(data_str, exit_command):
+        elif op.eq(data_str, EXIT_COMMAND):
             conn.send(b'exit')
             break
-        elif op.eq(data_str, pull_command):
-            result = os.popen(pull_command).read()
-        elif op.eq(data_str, launch_command):
-            result = os.popen(launch_command).read()
+        elif op.eq(data_str, PULL_COMMAND):
+            result = os.popen(PULL_COMMAND).read()
+        elif op.eq(data_str, LAUNCH_COMMAND):
+            result = os.popen(LAUNCH_COMMAND).read()
         else:
             result = 'invalid command'
         conn.send(bytes(result, encoding='utf-8'))
