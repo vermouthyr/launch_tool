@@ -12,6 +12,7 @@ server.listen(5)
 
 while True:
     conn, addr = server.accept()
+    print('connected')
     while True:
         data = conn.recv(1024)
         data_str = str(data, encoding='utf-8')
