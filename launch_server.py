@@ -1,8 +1,9 @@
 import os
 import socket
+import operator as op
 
 server = socket.socket()
-server.bind(('localhost', 1362))
+server.bind(('localhost', 1365))
 
 server.listen(5)
 while True:
@@ -13,11 +14,12 @@ while True:
         if not data:
             print("client has lost")
             break
-        elif data == 'git pull origin master':
+        elif op.eq(data, 'git pull origin master') == 0:
             os.system(data)
-            conn.send('pull success')
-        elif data == 'python hello.py':
+            conn.send(b'pull success')
+        elif op.eq(data, 'python hello.py') == 0:
             os.system(data)
-            conn.send('launch success')
-        elif data == 'exit':
+            conn.send(b'launch success')
+        elif op.eq(data, 'exit'):
+            conn.send(b'exit')
             server.close()

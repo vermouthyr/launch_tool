@@ -2,7 +2,7 @@ import socket
 
 client = socket.socket()
 
-client.connect(('localhost', 1362))
+client.connect(('localhost', 1365))
 
 while True:
     msg = input(">>").strip()
