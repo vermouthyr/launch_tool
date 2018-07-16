@@ -1,4 +1,5 @@
 import os
+import sys
 import socket
 import operator as op
 
@@ -22,7 +23,7 @@ while True:
             break
         elif op.eq(data_str, exit_command):
             conn.send(b'exit')
-            server.close()
+            break
         elif op.eq(data_str, pull_command):
             result = os.popen(pull_command).read()
         elif op.eq(data_str, launch_command):
@@ -30,3 +31,5 @@ while True:
         else:
             result = 'invalid command'
         conn.send(bytes(result, encoding='utf-8'))
+    server.close()
+    break
