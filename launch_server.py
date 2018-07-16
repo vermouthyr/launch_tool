@@ -17,13 +17,13 @@ server.bind(ADDR)
 server.listen(5)
 
 
-# class RunService(Thread):
-#     def __init__(self, command):
-#         super().__init__()
-#         self.command = command
-#
-#     def run(self):
-#         os.system(self.command)
+class RunService(Thread):
+    def __init__(self, command):
+        super().__init__()
+        self.command = command
+
+    def run(self):
+        os.system(self.command)
 
 
 EXIT_FLAG = False
@@ -44,10 +44,10 @@ while not EXIT_FLAG:
         elif op.eq(data, PULL_COMMAND):
             result = os.popen(PULL_COMMAND).read()
         elif op.eq(data, LAUNCH_COMMAND):
-            # t = RunService(data)
-            # t.setDaemon(True)
-            # t.start()
-            os.system(data)
+            t = RunService(data)
+            t.setDaemon(True)
+            t.start()
+            # os.system(data)
             # result = os.popen(LAUNCH_COMMAND).read()
             result = 'launch success'
         else:
