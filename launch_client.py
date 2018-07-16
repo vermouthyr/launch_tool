@@ -1,7 +1,9 @@
 import socket
+import operator as op
 
 HOST = '169.229.192.179'
-PORT = '1360'
+# HOST = '127.0.0.1'
+PORT = 1362
 ADDR = (HOST, PORT)
 BUFF_SIZE = 1024
 
@@ -15,3 +17,5 @@ while True:
     client.send(msg.encode())
     data = client.recv(BUFF_SIZE)
     print(data.decode())
+    if op.eq(data.decode(), 'exit'):
+        break
