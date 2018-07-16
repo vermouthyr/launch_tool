@@ -7,7 +7,7 @@ launch_command = 'python hello.py'
 exit_command = 'exit'
 
 server = socket.socket()
-server.bind(('localhost', 1360))
+server.bind(('0.0.0.0', 1360))
 server.listen(5)
 
 while True:
