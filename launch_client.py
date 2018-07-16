@@ -3,7 +3,7 @@ import operator as op
 
 HOST = '169.229.192.179'
 # HOST = '127.0.0.1'
-PORT = 1362
+PORT = 1360
 ADDR = (HOST, PORT)
 BUFF_SIZE = 1024
 
