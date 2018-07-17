@@ -40,6 +40,8 @@ while not EXIT_FLAG:
         elif op.eq(data, EXIT_COMMAND):
             conn.send(b'exit')
             EXIT_FLAG = True
+            conn.close()
+            server.close()
             break
         elif op.eq(data, PULL_COMMAND):
             result = os.popen(PULL_COMMAND).read()
@@ -53,5 +55,3 @@ while not EXIT_FLAG:
         else:
             result = 'invalid command'
         conn.send(bytes(result, encoding='utf-8'))
-    conn.close()
-    server.close()
