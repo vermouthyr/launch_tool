@@ -13,6 +13,7 @@ def shutdown_server():
 
 @app.route('/')
 def hello():
+    print('hello')
     return 'hello world'
 
 
